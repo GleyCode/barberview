@@ -1,0 +1,49 @@
+{% extends "barbearia/base.html" %}
+{% block titulo %}{{ profissional.nome }} — Minha Barbearia{% endblock %}
+{% block conteudo %}
+
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'profissional_lista' %}">Profissionais</a></li>
+        <li class="breadcrumb-item active">{{ profissional.nome }}</li>
+    </ol>
+</nav>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h1 class="h2">{{ profissional.nome }}</h1>
+        {% if profissional.telefone %}
+            <p class="text-muted">📞 {{ profissional.telefone }}</p>
+        {% endif %}
+        <div class="d-flex gap-2 mt-3">
+            <a href="{% url 'profissional_editar' profissional.pk %}" class="btn btn-warning btn-sm">Editar</a>
+            <a href="{% url 'profissional_lista' %}" class="btn btn-outline-secondary btn-sm ms-auto">Voltar</a>
+        </div>
+    </div>
+</div>
+
+<h3 class="h4 mb-3">📅 Agendamentos de {{ profissional.nome }} ({{ profissional.agendamentos.count }})</h3>
+{% if profissional.agendamentos.all %}
+    <div class="list-group">
+        {% for agendamento in profissional.agendamentos.all %}
+        <a href="{% url 'agendamento_detalhe' agendamento.pk %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            <span>
+                👤 {{ agendamento.cliente.nome }} - 
+                {% if agendamento.data_agendamento %}
+                    <small class="text-muted ms-2">{{ agendamento.data_agendamento|date:"d/m/Y - H:i" }}</small>
+                {% endif %}
+            </span>
+            {% if agendamento.status == 'CONFIRMADO' %}
+                <span class="badge bg-success">Confirmado</span>
+            {% elif agendamento.status == 'PENDENTE' %}
+                <span class="badge bg-warning text-dark">Pendente</span>
+            {% else %}
+                <span class="badge bg-danger">Cancelado</span>
+            {% endif %}
+        </a>
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="text-muted">Nenhum agendamento cadastrado para este profissional.</p>
+{% endif %}
+{% endblock %}

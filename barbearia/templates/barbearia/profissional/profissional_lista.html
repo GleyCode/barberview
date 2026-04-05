@@ -1,0 +1,41 @@
+{% extends "barbearia/base.html" %}
+{% block titulo %}Profissionais — Minha Barbearia{% endblock %}
+{% block conteudo %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h2">💈 Profissionais</h1>
+    <a href="{% url 'profissional_criar' %}" class="btn btn-primary">+ Novo Profissional</a>
+</div>
+
+{% if profissionais %}
+<div class="row row-cols-1 row-cols-md-3 g-3">
+    {% for profissional in profissionais %}
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{% url 'profissional_detalhe' profissional.pk %}" class="text-decoration-none text-dark">
+                        {{ profissional.nome }}
+                    </a>
+                </h5>
+                {% if profissional.especialidade %}
+                    <p class="card-text text-muted small">✂️ {{ profissional.especialidade }}</p>
+                {% endif %}
+                {% if profissional.telefone %}
+                    <p class="card-text text-muted small">📞 {{ profissional.telefone }}</p>
+                {% endif %}
+                <p class="card-text small">
+                    📅 {{ profissional.total_agendamentos }} agendamento{{ profissional.total_agendamentos|pluralize }}
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="text-center py-5 text-muted">
+    <p class="fs-1">💈</p>
+    <p>Nenhum profissional cadastrado.</p>
+    <a href="{% url 'profissional_criar' %}" class="btn btn-primary">Cadastrar primeiro profissional</a>
+</div>
+{% endif %}
+{% endblock %}

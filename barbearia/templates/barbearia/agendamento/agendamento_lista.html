@@ -1,0 +1,73 @@
+{% extends "barbearia/base.html" %}
+{% block titulo %}Agendamentos — Minha Barbearia{% endblock %}
+{% block conteudo %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h2">Agendamentos</h1>
+    <a href="{% url 'agendamento_criar' %}" class="btn btn-primary">+ Novo Agendamento</a>
+</div>
+
+<!-- Formulário de Busca -->
+<form method="get" class="mb-4">
+    <div class="input-group">
+        {{ form.q }}
+        <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+        {% if request.GET.q %}
+            <a href="{% url 'agendamento_lista' %}" class="btn btn-outline-danger">✕ Limpar</a>
+        {% endif %}
+    </div>
+    {% if request.GET.q %}
+        <small class="text-muted">Resultados para: <strong>"{{ request.GET.q }}"</strong></small>
+    {% endif %}
+</form>
+
+<!-- Lista de Agendamentos -->
+{% if agendamentos %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for agendamento in agendamentos %}
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'agendamento_detalhe' agendamento.pk %}" class="text-decoration-none text-dark">
+                            {{ agendamento.cliente.nome }}
+                        </a>
+                    </h5>
+                    <p class="card-text text-muted small">
+                        💈 <a href="{% url 'profissional_detalhe' agendamento.profissional.pk %}">{{ agendamento.profissional.nome }}</a>
+                    </p>
+                    {% if agendamento.data_agendamento %}
+                        <p class="card-text small text-muted">📅 {{ agendamento.data_agendamento|date:"d/m/Y" }}</p>
+                    {% endif %}
+
+                    {% if agendamento.hora_agendamento %}
+                        <p class="card-text small text-muted">⏰ {{ agendamento.hora_agendamento|time:"H:i" }}</p>
+                    {% endif %}
+
+                    {% if agendamento.obs %}
+                        <p class="card-text small">{{ agendamento.obs|truncatechars:100 }}</p>
+                    {% endif %}
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    {% if agendamento.status == 'AGENDADO' %}
+                        <span class="badge text-bg-secondary">Agendado</span>
+                    {% elif agendamento.status == 'FINALIZADO' %}
+                        <span class="badge text-bg-success">Finalizado</span>
+                    {% else %}
+                        <span class="badge text-bg-danger">Cancelado</span>
+                    {% endif %}
+                    <a href="{% url 'agendamento_detalhe' agendamento.pk %}" class="btn btn-sm btn-outline-primary">
+                        Ver detalhes
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="text-center py-5 text-muted">
+        <p class="fs-1">📭</p>
+        <p>Nenhum agendamento encontrado.</p>
+        <a href="{% url 'agendamento_criar' %}" class="btn btn-primary">Cadastrar primeiro agendamento</a>
+    </div>
+{% endif %}
+{% endblock %}

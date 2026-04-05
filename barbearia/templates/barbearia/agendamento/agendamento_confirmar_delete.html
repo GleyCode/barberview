@@ -1,0 +1,37 @@
+{% extends "barbearia/base.html" %}
+{% block titulo %}Deletar Agendamento — Minha Barbearia{% endblock %}
+{% block conteudo %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h2 class="h4 mb-0">⚠️ Confirmar exclusão</h2>
+            </div>
+            <div class="card-body">
+                <p>Você tem certeza que deseja remover o agendamento de:</p>
+                <p class="fs-5 fw-bold">{{ agendamento.cliente.nome }}</p>
+                <p class="text-muted">Profissional: {{ agendamento.profissional.nome }}</p>
+                
+                {% if agendamento.data_agendamento %}
+                    <p class="text-muted">Data: {{ agendamento.data_agendamento|date:"d/m/Y" }}</p>
+                {% endif %}
+
+                {% if agendamento.hora_agendamento %}
+                    <p class="text-muted">Hora: {{ agendamento.hora_agendamento|time:"H:i" }}</p>
+                {% endif %}
+
+                <p class="text-danger small">Esta ação não pode ser desfeita.</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-danger">Sim, deletar</button>
+                        <a href="{% url 'agendamento_detalhe' agendamento.pk %}" class="btn btn-outline-secondary">
+                            Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

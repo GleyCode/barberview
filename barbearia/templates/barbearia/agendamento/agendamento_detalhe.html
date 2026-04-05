@@ -1,0 +1,77 @@
+{% extends "barbearia/base.html" %}
+{% block titulo %}Agendamento #{{ agendamento.pk }} — Minha Barbearia{% endblock %}
+{% block conteudo %}
+
+<!-- Navegação de volta -->
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'agendamento_lista' %}">Agendamentos</a></li>
+        <li class="breadcrumb-item active">Agendamento #{{ agendamento.pk }}</li>
+    </ol>
+</nav>
+
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start">
+            <h1 class="card-title h2">{{ agendamento.cliente.nome }}</h1>
+            {% if agendamento.status == 'AGENDADO' %}
+                <span class="badge bg-primary fs-6">Agendado</span>
+            {% elif agendamento.status == 'FINALIZADO' %}
+                <span class="badge bg-success fs-6">Finalizado</span>
+            {% else %}
+                <span class="badge bg-danger fs-6">Cancelado</span>
+            {% endif %}
+        </div>
+
+        <table class="table table-borderless mt-3">
+            <tr>
+                <th scope="row" class="text-muted" style="width: 150px;">Cliente</th>
+                <td>
+                    <a href="{% url 'cliente_detalhe' agendamento.cliente.pk %}">{{ agendamento.cliente.nome }}</a>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="text-muted">Profissional</th>
+                <td>
+                    <a href="{% url 'profissional_detalhe' agendamento.profissional.pk %}">{{ agendamento.profissional.nome }}</a>
+                </td>
+            </tr>
+
+            {% if agendamento.data_agendamento %}
+            <tr>
+                <th scope="row" class="text-muted">Data e Hora</th>
+                <td>{{ agendamento.data_agendamento|date:"d/m/Y" }}</td>
+            </tr>
+            {% endif %}
+
+            {% if agendamento.servico %}
+            <tr>
+                <th scope="row" class="text-muted">Serviço</th>
+                <td>{{ agendamento.servico }}</td>
+            </tr>
+            {% endif %}
+            
+            {% if agendamento.servico.preco %}
+            <tr>
+                <th scope="row" class="text-muted">Preço</th>
+                <td>R$ {{ agendamento.servico.preco }}
+            </tr>
+            {% endif %}
+        </table>
+
+        {% if agendamento.obs %}
+        <hr>
+        <h5>Observações</h5>
+        <p>{{ agendamento.obs }}</p>
+        {% endif %}
+        <hr>
+
+        <!-- Botões de Ação -->
+        <div class="d-flex gap-2 mt-4">
+            <a href="{% url 'agendamento_editar' agendamento.pk %}" class="btn btn-warning">Editar</a>
+            <a href="{% url 'agendamento_deletar' agendamento.pk %}" class="btn btn-danger">Deletar</a>
+            <a href="{% url 'agendamento_lista' %}" class="btn btn-outline-secondary ms-auto">Voltar</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
