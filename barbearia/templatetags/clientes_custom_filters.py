@@ -16,3 +16,14 @@ def format_phone(value):
         return f"({phone[:2]}) {phone[2:6]}-{phone[6:]}"
     
     return value
+
+@register.filter
+def format_cpf(value):
+    """Formata o cpf do cliente."""
+    cpf = str(value).strip()
+    
+    # Formato: 000.000.000-00 (11 dígitos).
+    if len(cpf) == 11:
+        return f"{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}"
+    
+    return value

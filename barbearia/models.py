@@ -1,8 +1,7 @@
 """
-Models da aplicação Biblioteca.
+Models da aplicação BarberView.
 
 Aqui definimos as tabelas do banco de dados usando classes Python.
-Cada classe = uma tabela. Cada atributo = uma coluna.
 """
 
 from django.db import models
@@ -71,7 +70,7 @@ class Cliente(models.Model):
         verbose_name='Nome completo'
     )
     cpf = models.CharField(
-        max_length=14, 
+        max_length=11, 
         unique=True, 
         verbose_name='CPF'
     )
