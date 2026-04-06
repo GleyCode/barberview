@@ -75,8 +75,9 @@ class Cliente(models.Model):
         unique=True, 
         verbose_name='CPF'
     )
+    # TODO: Validar o formato do telefone usando um Regex.
     telefone = models.CharField(
-        max_length=20, 
+        max_length=11, 
         blank=True, 
         verbose_name='Telefone'
     )

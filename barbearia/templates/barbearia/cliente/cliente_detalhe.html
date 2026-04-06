@@ -1,4 +1,5 @@
 {% extends "barbearia/base.html" %}
+{% load clientes_custom_filters %}
 {% block titulo %}{{ cliente.nome }} — Minha Barbearia{% endblock %}
 {% block conteudo %}
 
@@ -12,12 +13,15 @@
 <div class="card mb-4">
     <div class="card-body">
         <h1 class="h2">{{ cliente.nome }}</h1>
+
         {% if cliente.telefone %}
-            <p class="text-muted">📞 {{ cliente.telefone }}</p>
+            <p class="text-muted">📞 {{ cliente.telefone|format_phone }}</p>
         {% endif %}
+
         {% if cliente.email %}
             <p class="text-muted">✉️ {{ cliente.email }}</p>
         {% endif %}
+
         {% if cliente.observacoes %}
             <hr>
             <p>{{ cliente.observacoes }}</p>
