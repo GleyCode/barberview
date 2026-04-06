@@ -33,21 +33,20 @@
     </div>
 </div>
 
-<h3 class="h4 mb-3">Agendamentos de {{ cliente.nome }} ({{ cliente.agendamento_set.count }})</h3>
-{% if cliente.agendamento_set.all %}
+<h3 class="h4 mb-3">Agendamentos de {{ cliente.nome }} ({{ cliente.agendamentos.count }})</h3>
+{% if cliente.agendamentos.all %}
     <div class="list-group">
-        {% for agendamento in cliente.agendamento_set.all %}
+        {% for agendamento in cliente.agendamentos.all %}
         <a href="{% url 'agendamento_detalhe' agendamento.pk %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
             <span>
                 💈 {{ agendamento.profissional.nome }}
-                {% if agendamento.data_hora %}
-                    <small class="text-muted ms-2">{{ agendamento.data_hora|date:"d/m/Y H:i" }}</small>
-                {% endif %}
             </span>
-            {% if agendamento.confirmado %}
-                <span class="badge bg-success">Confirmado</span>
+            {% if agendamento.status == "AGENDADO" %}
+                <span class="badge bg-primary fs-6">Agendado</span>
+            {% elif agendamento.status == "FINALIZADO" %}
+                <span class="badge bg-success fs-6">Finalizado</span>
             {% else %}
-                <span class="badge bg-warning text-dark">Pendente</span>
+                <span class="badge bg-danger fs-6">Cancelado</span>
             {% endif %}
         </a>
         {% endfor %}
