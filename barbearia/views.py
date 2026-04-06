@@ -158,7 +158,7 @@ def cliente_criar(request):
         
     context = {
         'form': form,
-        'acao': 'Cadastrar',
+        'finalidade': 'Cadastrar',
     }
     
     return render(request, 'barbearia/cliente/cliente_form.html', context)
