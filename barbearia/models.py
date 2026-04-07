@@ -62,6 +62,7 @@ class Agendamento(models.Model):
         return f'{self.cliente} - {self.data_agendamento.strftime("%d/%m/%Y %H:%M")} - {self.status}'
 
 
+# TODO: Validar o formato do telefone usando um Regex.
 class Cliente(models.Model):
     """Representa o cliente da barbearia."""
 
@@ -74,7 +75,6 @@ class Cliente(models.Model):
         unique=True, 
         verbose_name='CPF'
     )
-    # TODO: Validar o formato do telefone usando um Regex.
     telefone = models.CharField(
         max_length=11, 
         blank=True, 
@@ -98,7 +98,8 @@ class Cliente(models.Model):
     def __str__(self):
         return self.nome
 
-
+# TODO: Adicionar um campo de foto do profissional usando ImageField e configurar o media no settings.py.
+# TODO: Adicionar um campo de especialidade para o profissional.
 class Profissional(models.Model):
     """Representa um profissional da barbearia."""
 

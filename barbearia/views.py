@@ -121,7 +121,7 @@ def cliente_lista(request):
         if q:
             clientes = clientes.filter(nome__icontains=q)
     
-    # Paginação: mostra 10 clientes por página
+    # Paginação: mostra 10 clientes por página.
     paginator = Paginator(clientes, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -192,10 +192,23 @@ def cliente_editar(request, pk):
 
 def profissional_lista(request):
     """Lista todos os profissionais."""
+    form = BuscaForm(request.GET)
     profissionais = Profissional.objects.all()
     
+    # Se o formulário foi preenchido e é válido
+    if form.is_valid():
+        q = form.cleaned_data.get('q')
+        if q:
+            profissionais = profissionais.filter(nome__icontains=q)
+
+    # Paginação: mostra 6 profissionais por página.
+    paginator = Paginator(profissionais, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
     context = {
-        'profissionais': profissionais,
+        'page_obj': page_obj,
+        'form': form,
     }
     
     return render(request, 'barbearia/profissional/profissional_lista.html', context)
