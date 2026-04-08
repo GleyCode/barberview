@@ -3,7 +3,7 @@
 {% block conteudo %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="h2">Profissionais</h1>
-    <a href="{% url 'profissional_criar' %}" class="btn btn-primary">+ Novo Profissional</a>
+    <a href="{% url 'profissional_criar' %}" class="btn btn-warning">+ Novo Profissional</a>
 </div>
 
 <!-- Formulário de Busca -->
@@ -41,7 +41,7 @@
                     <p class="card-text small">
                         {{ profissional.agendamentos.count }} agendamento{{ profissional.agendamentos.count|pluralize }}
                     </p>
-                    <a href="{% url 'profissional_detalhe' profissional.pk %}" class="btn btn-primary">Ver datalhes</a>
+                    <a href="{% url 'profissional_detalhe' profissional.pk %}" class="btn btn-warning">Ver detalhes</a>
                 </div>
                 <div class="card-footer text-body-secondary">
                     Disponível
@@ -55,7 +55,7 @@
 <div class="text-center py-5 text-muted mb-4">
     <p class="fs-1">💈</p>
     <p>Nenhum profissional cadastrado.</p>
-    <a href="{% url 'profissional_criar' %}" class="btn btn-primary">Cadastrar primeiro profissional</a>
+    <a href="{% url 'profissional_criar' %}" class="btn btn-warning">Cadastrar primeiro profissional</a>
 </div>
 {% endif %}
 
