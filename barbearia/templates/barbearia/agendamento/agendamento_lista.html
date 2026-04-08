@@ -3,7 +3,7 @@
 {% block conteudo %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="h2">Agendamentos</h1>
-    <a href="{% url 'agendamento_criar' %}" class="btn btn-primary">+ Novo Agendamento</a>
+    <a href="{% url 'agendamento_criar' %}" class="btn btn-warning">+ Novo Agendamento</a>
 </div>
 
 <!-- Formulário de Busca -->
@@ -47,15 +47,15 @@
                         <p class="card-text small">{{ agendamento.obs|truncatechars:100 }}</p>
                     {% endif %}
                 </div>
-                <div class="card-footer d-flex justify-content-between align-items-center">
+                <div class="card-footer d-flex justify-content-between bg-dark-subtle align-items-center">
                     {% if agendamento.status == 'AGENDADO' %}
-                        <span class="badge text-bg-secondary">Agendado</span>
+                        <span class="badge bg-primary fs-6">Agendado</span>
                     {% elif agendamento.status == 'FINALIZADO' %}
-                        <span class="badge text-bg-success">Finalizado</span>
+                        <span class="badge bg-success fs-6">Finalizado</span>
                     {% else %}
-                        <span class="badge text-bg-danger">Cancelado</span>
+                        <span class="badge bg-danger fs-6">Cancelado</span>
                     {% endif %}
-                    <a href="{% url 'agendamento_detalhe' agendamento.pk %}" class="btn btn-sm btn-outline-primary">
+                    <a href="{% url 'agendamento_detalhe' agendamento.pk %}" class="btn btn-warning">
                         Ver detalhes
                     </a>
                 </div>
@@ -67,7 +67,34 @@
     <div class="text-center py-5 text-muted">
         <p class="fs-1">📭</p>
         <p>Nenhum agendamento encontrado.</p>
-        <a href="{% url 'agendamento_criar' %}" class="btn btn-primary">Cadastrar primeiro agendamento</a>
+        <a href="{% url 'agendamento_criar' %}" class="btn btn-outline-warning">Cadastrar primeiro agendamento</a>
     </div>
 {% endif %}
+
+<!-- Carousel -->
+<div id="carouse" class="carousel slide mt-5">
+  <div class="carousel-inner">
+
+    <div class="carousel-item active">
+      <img src="https://picsum.photos/800/200" class="d-block w-100" alt="...">
+    </div>
+
+    <div class="carousel-item">
+      <img src="https://picsum.photos/800/200" class="d-block w-100" alt="...">
+    </div>
+
+    <div class="carousel-item">
+      <img src="https://picsum.photos/800/200" class="d-block w-100" alt="...">
+    </div>
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 {% endblock %}
