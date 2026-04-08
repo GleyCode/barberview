@@ -1,5 +1,5 @@
 """
-Formulários da aplicação Biblioteca.
+Formulários da aplicação BarberView.
 
 ModelForm gera o formulário automaticamente a partir do Model.
 """
@@ -47,10 +47,10 @@ class ProfissionalForm(forms.ModelForm):
         model = Profissional
         fields = ['nome', 'cpf', 'telefone', 'obs']
         widgets = {
-            'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome completo'}),
-            'cpf': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'CPF'}),
-            'telefone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Telefone'}),
-            'obs': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Observações adicionais', 'rows': 3}),
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ex: João da Silva Vargas'}),
+            'cpf': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '000.000.000-00'}),
+            'telefone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ex: (85) 11111-1111'}),
+            'obs': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'O profissional é ...', 'rows': 5}),
         }
 
 

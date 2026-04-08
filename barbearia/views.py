@@ -238,7 +238,7 @@ def profissional_criar(request):
         
     context = {
         'form': form,
-        'acao': 'Cadastrar',
+        'finalidade': 'Cadastrar',
     }
     
     return render(request, 'barbearia/profissional/profissional_form.html', context)
