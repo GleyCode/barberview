@@ -1,11 +1,11 @@
 {% extends "barbearia/base.html" %}
-{% block titulo %}{{ acao }} Profissional — Minha Barbearia{% endblock %}
+{% block titulo %}{{ finalidade }} Profissional — Minha Barbearia{% endblock %}
 {% block conteudo %}
 <div class="row justify-content-center">
     <div class="col-lg-6">
         <div class="card">
             <div class="card-header">
-                <h2 class="h4 mb-0">{{ acao }} Profissional</h2>
+                <h2 class="h4 mb-0">{{ finalidade }} Profissional</h2>
             </div>
             <div class="card-body">
                 <form method="post">
@@ -17,6 +17,7 @@
                             <div class="text-danger small">{{ form.nome.errors }}</div>
                         {% endif %}
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label fw-bold">CPF</label>
                         {{ form.cpf }}
@@ -24,6 +25,7 @@
                             <div class="text-danger small">{{ form.cpf.errors }}</div>
                         {% endif %}
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label fw-bold">Telefone</label>
                         {{ form.telefone }}
@@ -31,6 +33,7 @@
                             <div class="text-danger small">{{ form.telefone.errors }}</div>
                         {% endif %}
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label fw-bold">Observações adicionais</label>
                         {{ form.obs }}
@@ -38,6 +41,7 @@
                             <div class="text-danger small">{{ form.obs.errors }}</div>
                         {% endif %}
                     </div>
+                    
                     <div class="d-flex gap-2">
                         <button type="submit" class="btn btn-primary">💾 Salvar</button>
                         {% if profissional %}
