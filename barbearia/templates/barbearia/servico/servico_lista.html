@@ -2,8 +2,8 @@
 {% block titulo %}Clientes — Minha Barbearia{% endblock %}
 {% block conteudo %}
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="h2">Serviços {{ servicos.count }}</h1>
-    <a href="{% url 'servico_criar' %}" class="btn btn-primary">+ Novo Serviço</a>
+    <h1 class="h2">Serviços</h1>
+    <a href="{% url 'servico_criar' %}" class="btn btn-warning">+ Novo Serviço</a>
 </div>
 
 {% if servicos %}
@@ -22,7 +22,7 @@
                 {% endif %}
                 {% if servico.descricao %}
                     <p class="card-text text-muted small">{{ servico.descricao }}</p>
-                {% endif %}}
+                {% endif %}
                 <p class="card-text small">
                     {{ servico.total_agendamentos }} agendamento{{ servico.total_agendamentos|pluralize }}
                 </p>
@@ -35,7 +35,7 @@
 <div class="text-center py-5 text-muted">
     <p class="fs-1"></p>
     <p>Nenhum serviço cadastrado.</p>
-    <a href="{% url 'servico_criar' %}" class="btn btn-primary">Cadastrar primeiro serviço</a>
+    <a href="{% url 'servico_criar' %}" class="btn btn-warning">Cadastrar primeiro serviço</a>
 </div>
 {% endif %}
 {% endblock %}
