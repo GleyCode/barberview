@@ -1,0 +1,104 @@
+# =====================
+# Python
+# =====================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pycache
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+
+# =====================
+# Ambiente Virtual
+# =====================
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# =====================
+# Django
+# =====================
+*.log
+*.pot
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+static_root/
+
+# =====================
+# Variáveis de Ambiente
+# =====================
+.env
+.env.*
+!.env.example
+
+# =====================
+# Editores e IDEs
+# =====================
+
+# VS Code
+.vscode/
+
+# PyCharm / IntelliJ
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim / Neovim
+*.swp
+*.swo
+*~
+
+# =====================
+# Sistema Operacional
+# =====================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# =====================
+# Testes e Cobertura
+# =====================
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.tox/
+nosetests.xml
+coverage.xml
+
+# =====================
+# Misc
+# =====================
+*.bak
+*.tmp
+*.orig
