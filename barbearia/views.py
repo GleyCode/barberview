@@ -33,9 +33,13 @@ def agendamento_lista(request):
                 Q(profissional__nome__icontains=q)
             )
 
-    #agen = Agendamento.objects.filter(data_agendamento) 
+    # Paginação: mostra 3 clientes por página.
+    paginator = Paginator(agendamentos, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+     
     context = {
-        'agendamentos': agendamentos,
+        'page_obj': page_obj,
         'form': form,
     }
     return render(request, 'barbearia/agendamento/agendamento_lista.html', context)

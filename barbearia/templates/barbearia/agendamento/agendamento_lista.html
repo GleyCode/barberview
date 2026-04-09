@@ -21,9 +21,9 @@
 </form>
 
 <!-- Lista de Agendamentos -->
-{% if agendamentos %}
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {% for agendamento in agendamentos %}
+{% if page_obj %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mb-4 g-4">
+        {% for agendamento in page_obj %}
         <div class="col">
             <div class="card h-100">
                 <div class="card-body">
@@ -64,12 +64,41 @@
         {% endfor %}
     </div>
 {% else %}
-    <div class="text-center py-5 text-muted">
+    <div class="text-center py-5 text-muted mb-4">
         <p class="fs-1">📭</p>
         <p>Nenhum agendamento encontrado.</p>
         <a href="{% url 'agendamento_criar' %}" class="btn btn-outline-warning">Cadastrar primeiro agendamento</a>
     </div>
 {% endif %}
+
+<!-- Paginador -->
+<nav>
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link" href="#">Anterior</span>
+        </li>
+        {% endif %}
+
+        <li class="page-item disabled">
+            <span class="page-link" href="#">Página {{ page_obj.number }}</span>
+        </li>
+
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próxima</a>  
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link" href="#">Próxima</span>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
 
 <hr>
 
