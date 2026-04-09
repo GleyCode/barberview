@@ -22,7 +22,7 @@ class AgendamentoForm(forms.ModelForm):
             'servico': forms.Select(attrs={'class': 'form-select'}),
             'data_agendamento': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'hora_agendamento': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),
-            'obs': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Observações adicionais', 'rows': 3}),
+            'obs': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'O cliente prefere...', 'rows': 3}),
         }
 
 
@@ -33,10 +33,10 @@ class ClienteForm(forms.ModelForm):
         model = Cliente
         fields = ['nome', 'cpf', 'telefone', 'obs']
         widgets = {
-            'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome completo'}),
-            'cpf': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'CPF'}),
-            'telefone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Telefone'}),
-            'obs': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Observações adicionais', 'rows': 3}),
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ex: João da Silva Vargas'}),
+            'cpf': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '000.000.000-00'}),
+            'telefone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ex: (85) 11111-1111'}),
+            'obs': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'O cliente prefere...', 'rows': 3}),
         }
 
 

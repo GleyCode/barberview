@@ -65,7 +65,7 @@ def agendamento_criar(request):
         form = AgendamentoForm()
     context = {
         'form': form,
-        'acao': 'Cadastrar',
+        'finalidade': 'Cadastrar',
     }
     return render(request, 'barbearia/agendamento/agendamento_form.html', context)
 
