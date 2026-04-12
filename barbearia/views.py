@@ -309,7 +309,7 @@ def servico_criar(request):
 
     context = {
         'form': form,
-        'acao': 'Cadastrar',
+        'finalidade': 'Cadastrar',
     }
     
     return render(request, 'barbearia/servico/servico_form.html', context)
@@ -330,7 +330,7 @@ def servico_editar(request, pk):
 
     context = {
         'form': form,
-        'acao': 'Editar',
+        'finalidade': 'Editar',
         'servico': servico,
     }
     

@@ -61,9 +61,9 @@ class ServicoForm(forms.ModelForm):
         model = Servico
         fields = ['nome', 'preco', 'descricao']
         widgets = {
-            'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome do serviço'}),
-            'preco': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Preço do serviço'}),
-            'descricao': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Descrição do serviço', 'rows': 3}),
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ex: Corte militar, Barba, etc'}),
+            'preco': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ex: R$ 00,00'}),
+            'descricao': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Ex: Corte curto', 'rows': 3}),
         }
         
         
