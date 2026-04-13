@@ -1,4 +1,5 @@
 {% extends "barbearia/base.html" %}
+{% load static %}
 {% block titulo %}Clientes — Minha Barbearia{% endblock %}
 {% block conteudo %}
 <div class="d-flex justify-content-between align-items-center mb-4">
@@ -7,30 +8,42 @@
 </div>
 
 {% if servicos %}
-<div class="row row-cols-1 row-cols-md-3 g-3">
-    {% for servico in servicos %}
-    <div class="col">
-        <div class="card h-100">
-            <div class="card-body">
-                <h5 class="card-title">
-                    <a href="{% url 'servico_detalhe' servico.pk %}" class="text-decoration-none text-dark">
-                        {{ servico.nome }}
+    <div class="accordion accordion-servico" id="accordionList">
+        {% for servico in servicos %}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading-{{ forloop.counter }}">
+                <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#collapse-{{ forloop.counter }}" 
+                    aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                    aria-controls="collapse-{{ forloop.counter }}">
+                    {{ servico.nome }}
+                </button>
+            </h2>
+            <div id="collapse-{{ forloop.counter }}" 
+                class="accordion-collapse collapse {% if forloop.first %}show{% endif %}"
+                aria-labelledby="heading-{{ forloop.counter }}" 
+                data-bs-parent="#accordionList">
+                <div class="accordion-body">
+                    {% if servico.descricao %}
+                    <p class="mb-2">{{ servico.descricao }}</p>
+                    {% endif %}
+
+                    {% if servico.preco %}
+                    <p class="mb-1"><strong>Preço:</strong> R$ {{ servico.preco|floatformat:2 }}</p>
+                    {% endif %}
+
+                    <p class="mb-1">{{ servico.total_agendamentos }} {{ servico.total_agendamentos|pluralize:"agendamento" }}</p>
+
+                    <a href="{% url 'servico_detalhe' servico.pk %}" class="btn btn-dark mt-3">
+                        Ver Detalhes
                     </a>
-                </h5>
-                {% if servico.preco %}
-                    <p class="card-text text-muted small">{{ servico.preco|floatformat:2 }}</p>
-                {% endif %}
-                {% if servico.descricao %}
-                    <p class="card-text text-muted small">{{ servico.descricao }}</p>
-                {% endif %}
-                <p class="card-text small">
-                    {{ servico.total_agendamentos }} agendamento{{ servico.total_agendamentos|pluralize }}
-                </p>
+                </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
 {% else %}
 <div class="text-center py-5 text-muted">
     <p class="fs-1"></p>
